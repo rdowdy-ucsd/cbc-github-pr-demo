@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    
+    <script src="lib/jquery/1.11.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="lib/bootstrap/3.3.4/bootstrap.min.css">
+    <script src="lib/bootstrap/3.3.4/bootstrap.min.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 1em 0 0 0;
+      }
+      /* bootstrap overrides */
+      ul.list-group {
+        border-radius: 0;
+        box-shadow: none;
+        list-style: none;
+        margin-bottom: 0;
+      }
+      #inspiration {
+        color: #888;
+        font-style: italic;
+        padding-top: 1em;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container theme-showcase" role="main">
+
+      <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Coding Boot Camp Group Project Resources</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li><a href="http://api.jquery.com/jquery.ajax/">$.ajax()</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">AJAX without jQuery (MDN)</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">make fetch() happen? (MDN)</a></li>
+                <li><a href="https://github.com/abhishekbanthia/Public-APIs">APIs APIs APIs</a></li>
+                <li><a href="http://getbootstrap.com/css/#tables">Bootstrap tables</a></li>
+                <li><a href="https://codepen.io/jaycbrf/pen/iBszr">Bootstrap + JS form validation</a></li>
+              </ul>
+              <p id="inspiration">
+                ...
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3"></div>
+      </div>
+
+    </div>
+    
+    <script>
+      $.ajax({
+        url: 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp',
+        dataType: 'jsonp',
+        jsonp: 'jsonp'
+      }).then(
+        function(response) {
+          console.log('response', response);
+          $('#inspiration').html(response.quoteText + ' – ' + response.quoteAuthor);
+        },
+        function(error) {
+          console.log('error', error);
+        }
+      );
+    </script>
+  </body>
+</html>
